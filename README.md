@@ -8,27 +8,29 @@ Information about webm:
 You need Haxe and OpenFL. https://openfl.org/
 
 ```
-haxelib install openfl-webm
+haxelib git extension-webm https://github.com/ahika462/extension-webm
 ```
 
 ## Simple Example:
 
 ```actionscript
-var sprite:Sprite = new Sprite();
-sprite.scaleX = 2;
-sprite.scaleY = 2;
-addChild(sprite);
-
 var io:WebmIo = new WebmIoFile("c:/projects/test.webm");
-var player:WebmPlayer = new WebmPlayer(io, sprite);
-player.addEventListener('play', function(e) {
-	trace('play!');
+var player:WebmPlayer = new WebmPlayer();
+player.fuck(io, true);
+player.addEventListener(WebmEvent.PLAY, function(e:WebmEvent) {
+	trace("play!");
 });
-player.addEventListener('end', function(e) {
-	trace('end!');
+player.addEventListener(WebmEvent.STOP, function(e:WebmEvent) {
+	trace("stop!");
 });
-player.addEventListener('stop', function(e) {
-	trace('stop!');
+player.addEventListener(WebmEvent.COMPLETE, function(e:WebmEvent) {
+	trace("complete!");
+});
+player.addEventListener(WebmEvent.RESTART, function(e:WebmEvent) {
+	trace("restart!");
+});
+player.addEventListener(WebmEvent.PAUSE, function(e:WebmEvent) {
+	trace("pause!");
 });
 player.play();
 ```
